@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
-import 'package:dio_ap/Api/user_model.dart';
+import 'package:dio_ap/model/user_model.dart';
 
 class ApiService {
   final Dio _dio = Dio(
     BaseOptions(baseUrl: "https://reqres.in/api/"),
   );
 
-  Future<List<UserModel>?> getPosts() async {
+  Future<UserModel?> getPosts() async {
     try {
       final response = await _dio.get('/users');
       if (response.statusCode == 200) {
-        final List<dynamic> result = response.data['data'];
-        return result.map((e) => UserModel.fromJson(e)).toList();
+        final user = UserModel.fromJson(response.data);
+        return user;
       } else {
         
         throw response.data; 

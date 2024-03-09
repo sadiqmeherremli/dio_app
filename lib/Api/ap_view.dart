@@ -17,14 +17,14 @@ class ApView extends StatelessWidget {
       ),
       body: Consumer<DioProvider>(
         builder: (context, provider, child) {
-          if (provider.items.isEmpty) {
+          if (provider.items == null) {
             return const Center(
               child: Text("List is empty"),
             );
           }
 
           return Center(
-            child: Text(provider.items.first.data?.id.toString() ?? "wrong "),
+            child:Image.network(provider.items?.data?[0].avatar ?? "Error"),
           );
         },
       ),
